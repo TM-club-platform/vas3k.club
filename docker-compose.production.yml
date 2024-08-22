@@ -8,7 +8,7 @@ services:
       - MODE=production
       - PYTHONUNBUFFERED=1
       - DEBUG=false
-      - APP_HOST=https://vas3k.club
+      - APP_HOST=206.189.135.26
       - MEDIA_UPLOAD_URL=https://i.vas3k.club/upload/
       - POSTGRES_DB=vas3k_club
       - POSTGRES_USER=vas3k
@@ -64,20 +64,20 @@ services:
       options:
         max-size: "100M"
 
-  # helpdeskbot:
-  #   <<: *app
-  #   command: make docker-run-helpdeskbot
-  #   container_name: club_help_desk_bot
-  #   depends_on:
-  #     - club_app
-  #     - postgres
-  #     - redis
-  #   ports:
-  #     - "8817:8817"
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "100M"
+  helpdeskbot:
+    <<: *app
+    command: make docker-run-helpdeskbot
+    container_name: club_help_desk_bot
+    depends_on:
+      - club_app
+      - postgres
+      - redis
+    ports:
+      - "8817:8817"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100M"
 
   cron:
     <<: *app
