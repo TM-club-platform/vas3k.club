@@ -1,7 +1,7 @@
 version: "3"
 services:
   club_app: &app
-    image: ghcr.io/vas3k/club:${GITHUB_SHA:-latest}
+    image: ghcr.io/xen-sor/club:${GITHUB_SHA:-latest}
     command: make docker-run-production
     container_name: club_app
     environment:
@@ -49,35 +49,35 @@ services:
       options:
         max-size: "100M"
 
-  # bot:
-  #   <<: *app
-  #   command: make docker-run-bot
-  #   container_name: club_bot
-  #   depends_on:
-  #     - club_app
-  #     - postgres
-  #     - redis
-  #   ports:
-  #     - "8816:8816"
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "100M"
-  # 
-  # helpdeskbot:
-  #   <<: *app
-  #   command: make docker-run-helpdeskbot
-  #   container_name: club_help_desk_bot
-  #   depends_on:
-  #     - club_app
-  #     - postgres
-  #     - redis
-  #   ports:
-  #     - "8817:8817"
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "100M"
+  bot:
+    <<: *app
+    command: make docker-run-bot
+    container_name: club_bot
+    depends_on:
+      - club_app
+      - postgres
+      - redis
+    ports:
+      - "8816:8816"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100M"
+
+  helpdeskbot:
+    <<: *app
+    command: make docker-run-helpdeskbot
+    container_name: club_help_desk_bot
+    depends_on:
+      - club_app
+      - postgres
+      - redis
+    ports:
+      - "8817:8817"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100M"
 
   cron:
     <<: *app
