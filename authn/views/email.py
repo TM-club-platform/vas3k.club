@@ -10,7 +10,7 @@ from django_q.tasks import async_task
 
 from authn.helpers import set_session_cookie
 from authn.models.session import Session, Code
-from notifications.email.users import send_auth_email, send_payed_email
+from notifications.email.users import send_auth_email
 from notifications.telegram.users import notify_user_auth
 from users.models.user import User
 
@@ -48,8 +48,7 @@ def email_login(request):
                 ),
             )
 
-            if created:
-                send_payed_email(user)
+     
 
         except IntegrityError:
             return render(request, "error.html", {
