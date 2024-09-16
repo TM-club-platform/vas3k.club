@@ -1,4 +1,8 @@
+import logging
+from datetime import datetime, timedelta
+
 from django.conf import settings
+from django.db import IntegrityError
 from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -6,9 +10,11 @@ from django_q.tasks import async_task
 
 from authn.helpers import set_session_cookie
 from authn.models.session import Session, Code
-from notifications.email.users import send_auth_email
+from notifications.email.users import send_auth_email, send_payed_email
 from notifications.telegram.users import notify_user_auth
 from users.models.user import User
+
+log = logging.getLogger()
 
 
 def email_login(request):
@@ -22,8 +28,39 @@ def email_login(request):
 
     email_or_login = email_or_login.strip()
 
-    user = User.objects.filter(Q(email=email_or_login.lower()) | Q(slug=email_or_login)).first()
-    if not user:
+    if True:
+        # email login or sign up
+        now = datetime.utcnow()
+
+        try:
+            log.info("Add new user %s", email_or_login)
+
+            user, created = User.objects.get_or_create(
+                email=email_or_login.lower(),
+                defaults=dict(
+                    membership_platform_type=User.MEMBERSHIP_PLATFORM_DIRECT,
+                    full_name=email_or_login[:email_or_login.find("@")],
+                    membership_started_at=now,
+                    membership_expires_at=now + timedelta(days=365),
+                    created_at=now,
+                    updated_at=now,
+                    moderation_status=User.MODERATION_STATUS_INTRO,
+                ),
+            )
+
+            if created:
+                send_payed_email(user)
+
+        except IntegrityError:
+            return render(request, "error.html", {
+                "title": "Что-то пошло не так 🤔",
+                "message": "Напишите нам, и мы всё починим. Или попробуйте ещё раз.",
+            }, status=404)
+    else:
+        # email/nickname login
+        user = User.objects.filter(Q(email=email_or_login.lower()) | Q(slug=email_or_login)).first()
+
+        if not user:
         return render(request, "error.html", {
             "title": "Такого юзера нет 🤔",
             "message": "Пользователь с такой почтой не найден в списке членов Клуба. "
