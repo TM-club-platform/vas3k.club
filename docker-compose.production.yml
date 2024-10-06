@@ -8,8 +8,7 @@ services:
       - MODE=production
       - PYTHONUNBUFFERED=1
       - DEBUG=false
-      - APP_HOST=http://www.yourtravelmate.club/
-      - MEDIA_UPLOAD_URL=http://i.yourtravelmate.club/upload/
+      - APP_HOST=https://www.yourtravelmate.club/
       - POSTGRES_DB=vas3k_club
       - POSTGRES_USER=vas3k
       - POSTGRES_PASSWORD=vas3k
