@@ -18,8 +18,8 @@ ALLOWED_HOSTS = ["*", "127.0.0.1", "localhost", "0.0.0.0", "vas3k.club"]
 INTERNAL_IPS = ["127.0.0.1"]
 
 ADMINS = [
-    ("admin", "club@vas3k.club"),
-    ("vas3k", "me@vas3k.ru"),
+    ("admin", "club@yourtravelmate.club"),
+    ("xensor", "me@yourtravelmate.club"),
 ]
 
 INSTALLED_APPS = [
@@ -179,7 +179,7 @@ EMAIL_PORT = os.getenv("EMAIL_PORT", 587)
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Вастрик.Клуб <club@vas3k.club>")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Вастрик.Клуб <club@yourtravelmate.club>")
 
 # App
 
@@ -297,7 +297,7 @@ MIN_DAYS_TO_GIVE_BADGES = 35  # minimum "days" balance to buy and gift any badge
 MAX_MUTE_COUNT = 20  # maximum number of users allowed to mute
 CLEARED_POST_TEXT = "```\n" \
     "😥 Этот пост был удален самим автором и от него остались лишь комментарии участников. " \
-    "Если вы хотите приютить и развить эту тему как новый автор, напишите модераторам Клуба: moderator@vas3k.club." \
+    "Если вы хотите приютить и развить эту тему как новый автор, напишите модераторам Клуба: moderator@yourtravelmate.club" \
     "\n```"
 
 
