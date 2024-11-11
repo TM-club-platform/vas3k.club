@@ -17,14 +17,14 @@
 
 html, html[theme="light"] {
     --bg-color: #FCFDFF;
-    --opposite-bg-color: #282c35;
+    --opposite-bg-color: #325470;
 
     --text-color: #333;
     --brighter-text-color: #000;
     --opposite-text-color: #DDD;
 
     --block-bg-color: #FFF;
-    --opposite-block-bg-color: #282c35;
+    --opposite-block-bg-color: #325470;
     --block-shadow: 10px 15px 40px rgba(83, 91, 110, 0.11);
     --block-border: none;
 
@@ -53,7 +53,7 @@ html, html[theme="light"] {
 }
 
 html[theme="dark"] {
-    --bg-color: #282c35;
+    --bg-color: #325470;
     --opposite-bg-color: #FCFDFF;
 
     --text-color: #DDD;
@@ -91,7 +91,7 @@ html[theme="dark"] {
 
 @media (prefers-color-scheme: dark) {
     html {
-        --bg-color: #282c35;
+        --bg-color: #325470;
         --opposite-bg-color: #FCFDFF;
 
         --text-color: #DDD;
