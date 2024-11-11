@@ -50,14 +50,14 @@
         </div>
 
         <div class="feed-sidebar-block">
-            <div class="feed-sidebar-header">Комнаты</div>
+            <div class="feed-sidebar-header">Локации</div>
             <div class="feed-sidebar-topics">
                 {% for room in rooms|slice:":10" %}
                     {% include "rooms/widgets/room.html" with room=room type="card" %}
                 {% endfor %}
             </div>
             <div class="feed-sidebar-topics-more">
-                <a class="button button-small button-inverted" href="{% url "list_rooms" %}">Все комнаты &rarr;</a>
+                <a class="button button-small button-inverted" href="{% url "list_rooms" %}">Все локации &rarr;</a>
             </div>
         </div>
     </aside>
